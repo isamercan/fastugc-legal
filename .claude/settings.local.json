@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C /Users/isa.mercan/Git/fastugc-legal remote -v)",
+      "Bash(git -C /Users/isa.mercan/Git/fastugc-legal status)",
+      "Bash(git -C /Users/isa.mercan/Git/fastugc-legal log --oneline -5)",
+      "WebFetch(domain:isamercan.github.io)",
+      "Bash(gh api *)",
+      "Bash(git -C /Users/isa.mercan/Git/fastugc-legal add _config.yml index.md privacy-policy.md support.md terms-of-service.md)",
+      "Bash(git -C /Users/isa.mercan/Git/fastugc-legal commit -m ' *)",
+      "Bash(git -C /Users/isa.mercan/Git/fastugc-legal push)",
+      "Bash(gh auth *)",
+      "Bash(git -C /Users/isa.mercan/Git/fastugc-legal config --get remote.origin.url)",
+      "Read(//Users/isa.mercan/.ssh/**)",
+      "Bash(git config *)",
+      "Bash(ssh -T -o StrictHostKeyChecking=no -o BatchMode=yes git@github.com)",
+      "Bash(git -C /Users/isa.mercan/Git/fastugc-legal remote set-url origin git@github.com:isamercan/fastugc-legal.git)",
+      "Bash(git -C /Users/isa.mercan/Git/fastugc-legal -c core.sshCommand=\"ssh -i ~/.ssh/id_ed25519_github -o IdentitiesOnly=yes\" push origin main)",
+      "Bash(GH_TOKEN=\"\" gh --version)",
+      "Bash(security find-internet-password *)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" https://isamercan.github.io/fastugc-legal/)",
+      "Bash(curl -s https://isamercan.github.io/fastugc-legal/)",
+      "Bash(git -C /Users/isa.mercan/Git/fastugc-legal diff --stat)",
+      "Bash(git -C /Users/isa.mercan/Git/fastugc-legal add privacy-policy.md)",
+      "Bash(git *)"
+    ]
+  }
+}
