@@ -1,6 +1,6 @@
 # Privacy Policy — FastUGC
 
-**Last updated:** April 21, 2026
+**Last updated:** April 28, 2026
 
 FastUGC ("we", "us") is an iOS application that generates AI-powered user-generated-content (UGC) style videos — including AI avatars and AI voice-overs — for marketing, product promotion, and social content. This Privacy Policy explains what data we collect, why we collect it, and how we protect it.
 
@@ -50,6 +50,7 @@ FastUGC uses the following processors. Each has its own privacy practices — pl
 - **Google / Firebase** (authentication, Firestore database, cloud storage) — https://firebase.google.com/support/privacy
 - **RevenueCat** (subscription management) — https://www.revenuecat.com/privacy
 - **ElevenLabs** (text-to-speech voice generation) — https://elevenlabs.io/privacy. We send the script text you provide; we do not send personal identifiers.
+- **fal.ai** (AI inference for talking-head video generation) — https://fal.ai/privacy-policy. When you create an AI actor from a photo, the photo is sent to fal.ai as the source frame for the animation model. See Section 11 (Face Data) for details.
 
 ## 4. Where your data is stored
 
@@ -85,7 +86,40 @@ All data in transit is encrypted via TLS. Data at rest in Firebase and Firebase 
 
 If we materially change this policy, we will update the "Last updated" date at the top and, for significant changes, notify you in-app. Continued use of the app after changes means you accept the updated policy.
 
-## 10. Contact
+## 10. Face Data
+
+FastUGC offers an optional feature that lets you create a custom AI talking-head "actor" from a photo you choose. This section explains exactly how that works and what happens to the photo.
+
+### 10.1 What we collect
+- **A photo** that you select from your iOS Photo Library. We never use the camera. Because the photo contains a face, it can technically be considered face data.
+- **A boolean signal** — "does this photo contain at least one face?" — produced on your device.
+
+We do **not** collect, derive, or store:
+- Face embeddings, face geometry, or facial landmarks.
+- FaceID or any other biometric template.
+- Face-recognition identifiers, or any data used to identify a specific person.
+
+### 10.2 How we process it
+1. **On-device face check.** When you pick a photo, the app uses Apple's Vision framework (`VNDetectFaceRectanglesRequest`, revision 3) to verify that a face is present. This runs entirely on your iPhone and produces only a yes/no answer. If the answer is "no", your photo is rejected and is never uploaded.
+2. **Server-side video generation.** If the check passes and you choose to create the actor, the photo is cropped to 9:16, resized to a maximum of 1024 px, JPEG-compressed, and uploaded to our backend so that the AI model can use it as the source frame for animation. We do not extract any biometric features from the image at any point.
+
+### 10.3 Where it is stored and who has access
+- The photo is stored in **Firebase Storage** (Google LLC) under a path scoped to your user ID; other users cannot read it. See https://firebase.google.com/support/privacy.
+- The photo is sent to **fal.ai**, our AI inference provider, which uses it as the source frame for the talking-head model (`veed/fabric-1.0`, with MiniMax fallback). fal.ai's data handling is governed by its own privacy policy at https://fal.ai/privacy-policy.
+
+No other third party receives the photo.
+
+### 10.4 Retention and deletion
+- The photo is retained as long as you keep the associated AI actor in your library.
+- When you delete the actor, both the photo in Firebase Storage and the corresponding Firestore record are deleted.
+- When you delete your entire account (Settings → Delete Account in the app), all photos you uploaded for actor creation are deleted along with the rest of your account data, on the schedule described in Section 5 (Data retention).
+
+### 10.5 Your choice
+Use of this feature is entirely optional. You can also create AI actors from a **text description** instead of a photo, in which case no face data is involved at all.
+
+If you have questions about face data, contact us at **support@fastugc.app**.
+
+## 11. Contact
 
 Questions about this policy or your data?
 
